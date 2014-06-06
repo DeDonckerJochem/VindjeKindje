@@ -1,0 +1,120 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--<meta charset="UTF-8" />-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>FirstAidBracelet responsive web app</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="FirstAidBracelet responsive web app by Jochem De Doncker" />
+<meta name="keywords" content="Jochem, FirstAidBracelet, responsive, web app" />
+<meta name="author" content="Jochem" />
+<link rel="shortcut icon" href="<%= Page.ResolveUrl("~/images/favicon.ico")%>">
+<link href='http://fonts.googleapis.com/css?family=Chivo' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" type="text/css" href="<%= Page.ResolveUrl("~/styles/style.css")%>" />
+<link rel="stylesheet" type="text/css" href="<%= Page.ResolveUrl("~/font/stylesheet.css")%>" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div id="wrapper">
+        <!--<div class="container">-->
+        <!--Start van de header-->
+       <div id="omslag_head">
+        <div id="header">
+            <img id="logo-Master"src="<%= Page.ResolveUrl("~/images/handklein.png")%>" />
+            <p>Vind je kind</p>
+            <!--<div class="clear-on-mobile"></div>-->
+            <form id="form1" runat="server">
+            <div id="Menu">
+                <asp:LoginView ID="LoginView1" runat="server">
+                    <LoggedInTemplate>
+                        <a id="Home" href="<%= Page.ResolveUrl("~/Default.aspx")%>">Home</a>
+                        <asp:Button ID="hyperLinkButton" OnClick="btnLogout_Click" runat="server" Text="logout" />
+                        <span>
+                            <asp:LoginName ID="LoginName2" runat="server" FormatString="Welcome {0}!" />
+                        </span>
+                    </LoggedInTemplate>
+                    <AnonymousTemplate>
+                        <a id="Home" href="<%= Page.ResolveUrl("~/Default.aspx")%>">Home</a> 
+                        <a href="<%= Page.ResolveUrl("~/Login.aspx")%>">Login</a> 
+                        <!--<a id="registreer" href="<%= Page.ResolveUrl("~/Registreer.aspx")%>">Registreer</a> -->
+                        <a id="noodnummers" href="<%= Page.ResolveUrl("~/Noodnummers.aspx")%>">Noodnummers</a>
+                    </AnonymousTemplate>
+                    <RoleGroups>
+                        <asp:RoleGroup Roles="Arts">
+                            <ContentTemplate>
+                                <a id="Home" href="<%= Page.ResolveUrl("~/Default.aspx")%>">Home</a> 
+                                <a id="profiel" href="Default.aspx">Admin profiel</a>
+                                <asp:Button ID="hyperLinkButton" OnClick="btnLogout_Click" runat="server" Text="logout" />
+                                <span>
+                                    <asp:LoginName ID="LoginName2" runat="server" FormatString="Welcome {0}!" />
+                                </span>
+                            </ContentTemplate>
+                        </asp:RoleGroup>
+                        <asp:RoleGroup Roles="Ouder">
+                            <ContentTemplate>
+                                <a id="Home" href="<%= Page.ResolveUrl("~/Default.aspx")%>">Home</a> 
+                                <a id="profiel" href="<%= Page.ResolveUrl("~/ouder/profiel.aspx")%>">Profiel</a>
+                                <a id="Bandjes" href="<%= Page.ResolveUrl("~/ouder/bandjes.aspx")%>">Bandjes</a>
+                                <asp:Button ID="hyperLinkButton" OnClick="btnLogout_Click" runat="server" Text="logout" />
+                                <span>
+                                    <asp:LoginName ID="LoginName2" runat="server" FormatString="Welcome {0}!" />
+                                </span>
+                            </ContentTemplate>
+                        </asp:RoleGroup>
+                        <asp:RoleGroup Roles="Hulpverlener">
+                            <ContentTemplate>
+                                <a id="Home" href="<%= Page.ResolveUrl("~/Default.aspx")%>">Home</a>
+                                <a id="profiel" href="<%= Page.ResolveUrl("~/hulpverlener/profiel.aspx")%>">eigen profiel</a>
+                                 <a id="kindprofiel" href="<%= Page.ResolveUrl("~/hulpverlener/kindprofiel.aspx")%>">kindprofiel</a>
+                                <asp:Button ID="hyperLinkButton" OnClick="btnLogout_Click" runat="server" Text="logout" />
+                                <span>
+                                    <asp:LoginName ID="LoginName2" runat="server" FormatString="Welcome {0}!" />
+                                </span>
+                            </ContentTemplate>
+                        </asp:RoleGroup>
+                    </RoleGroups>
+                </asp:LoginView>
+            </div>
+            <!--<div class="clear-on-mobile"></div>-->
+        </div>
+       </div>
+        <!--wat lege regels om de opmaak te bekomen die ik wil, moet wel nog anders-->
+        <div class="clear">
+        </div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+        </form>
+        <!--een lijn met de klasse die specificieert dat het geen wat nu komt op een nieuwe lijn moet komen.-->
+        <div class="clear">
+        </div>
+        <!--Begin van de footer-->
+        <div id="footer">
+            <!--Begin van inner gedeelte footer-->
+            <div class="inner">
+                <p>
+                    No Account?</p>
+                <a href="">Share You're location</a>
+                <ul class="social">
+                    <li><a href="http://www.facebook.com/dzyngiri" title="Facebook">
+                        <img src="<%= Page.ResolveUrl("~/images/fb.png")%>" alt="Facebook" /></a></li>
+                    <li><a href="http://twitter.com/dzyngiri" title="Twitter">
+                        <img src="<%= Page.ResolveUrl("~/images/tw.png")%>" alt="Twitter" /></a></li>
+                    <li><a href="http://feeds.feedburner.com/Dzyngiri" title="RSS Feed">
+                        <img src="<%= Page.ResolveUrl("~/images/rss.png")%>" alt="RSS Feed" /></a></li>
+                    <!--<li><a href="http://twitter.com/dzyngiri" title="Go back to Dzyngiri to Download this demo"><img src="../Images/dg-small.png" alt="Dzyngiri" /></a></li>-->
+                </ul>
+            </div>
+            <div class="logo">
+                <p class="copyright">
+                    <span>&copy; 2014 | Special Aid Bracelet | info@vindjekind.be | <a href="https://www.facebook.com">
+                        Facebook</a> | <a href="http://www.twitter.com">Twitter</a></span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--</div>-->
+</body>
+</html>

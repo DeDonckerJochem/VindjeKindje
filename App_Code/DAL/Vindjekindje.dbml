@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Armband" Class="VindjekindjeDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=JOCHEM-PC;Initial Catalog=Armband;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ArmbandConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.TALL" Member="TALLs">
+    <Type Name="TALL">
+      <Column Name="AllergieId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Omschrijving" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Behandeling" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="TALL_TKIN_ALL" Member="TKIN_ALLs" ThisKey="AllergieId" OtherKey="FkAllergie" Type="TKIN_ALL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TSOS" Member="TSOs">
+    <Type Name="TSO">
+      <Column Name="SosMessageId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FkHulpverlenerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FkGebruikerKindId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FkGemeenteId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TGEM_TSO" Member="TGEM" ThisKey="FkGemeenteId" OtherKey="GemeenteId" Type="TGEM" IsForeignKey="true" />
+      <Association Name="TOUD_KIN_TSO" Member="TOUD_KIN" ThisKey="FkGebruikerKindId" OtherKey="GebruikerKindId" Type="TOUD_KIN" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TARM" Member="TARMs">
+    <Type Name="TARM">
+      <Column Name="ArmbandId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FkKindId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TARM_TARM_HUL" Member="TARM_HULs" ThisKey="ArmbandId" OtherKey="FkArmbandId" Type="TARM_HUL" />
+      <Association Name="TKIN_TARM" Member="TKIN" ThisKey="FkKindId" OtherKey="KindId" Type="TKIN" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[TARM/HUL]" Member="TARM_HULs">
+    <Type Name="TARM_HUL">
+      <Column Name="BerichtId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FkArmbandId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FkHulpVerlenerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="datum" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="TARM_TARM_HUL" Member="TARM" ThisKey="FkArmbandId" OtherKey="ArmbandId" Type="TARM" IsForeignKey="true" />
+      <Association Name="THUL_TARM_HUL" Member="THUL" ThisKey="FkHulpVerlenerId" OtherKey="HulpverlenerId" Type="THUL" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TART" Member="TARTs">
+    <Type Name="TART">
+      <Column Name="ArtsID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Naam" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Voornaam" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="HuisArtsTel" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="TART_TKIN" Member="TKINs" ThisKey="ArtsID" OtherKey="FkHuisArts" Type="TKIN" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBLO" Member="TBLOs">
+    <Type Name="TBLO">
+      <Column Name="BloedGroepId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Omschrijving" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="TBLO_TKIN" Member="TKINs" ThisKey="BloedGroepId" OtherKey="FkBloedGroepId" Type="TKIN" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TGEM" Member="TGEMs">
+    <Type Name="TGEM">
+      <Column Name="GemeenteId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Naam" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="TGEM_TSO" Member="TSOs" ThisKey="GemeenteId" OtherKey="FkGemeenteId" Type="TSO" />
+      <Association Name="TGEM_THUL" Member="THULs" ThisKey="GemeenteId" OtherKey="FkGemeenteId" Type="THUL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.THUL" Member="THULs">
+    <Type Name="THUL">
+      <Column Name="HulpverlenerId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Naam" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Voornaam" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Functie" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FkGemeenteId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="THUL_TARM_HUL" Member="TARM_HULs" ThisKey="HulpverlenerId" OtherKey="FkHulpVerlenerId" Type="TARM_HUL" />
+      <Association Name="TGEM_THUL" Member="TGEM" ThisKey="FkGemeenteId" OtherKey="GemeenteId" Type="TGEM" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TKIN" Member="TKINs">
+    <Type Name="TKIN">
+      <Column Name="KindId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Naam" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Voornaam" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GebDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Adres" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FkBloedGroepId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FkHuisArts" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TKIN_TARM" Member="TARMs" ThisKey="KindId" OtherKey="FkKindId" Type="TARM" />
+      <Association Name="TKIN_TKIN_ALL" Member="TKIN_ALLs" ThisKey="KindId" OtherKey="FkKind" Type="TKIN_ALL" />
+      <Association Name="TKIN_TOUD_KIN" Member="TOUD_KINs" ThisKey="KindId" OtherKey="fkKindId" Type="TOUD_KIN" />
+      <Association Name="TART_TKIN" Member="TART" ThisKey="FkHuisArts" OtherKey="ArtsID" Type="TART" IsForeignKey="true" />
+      <Association Name="TBLO_TKIN" Member="TBLO" ThisKey="FkBloedGroepId" OtherKey="BloedGroepId" Type="TBLO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[TKIN/ALL]" Member="TKIN_ALLs">
+    <Type Name="TKIN_ALL">
+      <Column Name="KindAllergieId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FkAllergie" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FkKind" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TALL_TKIN_ALL" Member="TALL" ThisKey="FkAllergie" OtherKey="AllergieId" Type="TALL" IsForeignKey="true" />
+      <Association Name="TKIN_TKIN_ALL" Member="TKIN" ThisKey="FkKind" OtherKey="KindId" Type="TKIN" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TOUD" Member="TOUDs">
+    <Type Name="TOUD">
+      <Column Name="Ouderid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Naam" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Voornaam" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TelefoonNr" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MutualiteitsNr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GebDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Bloedgroep" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Adres" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="OuderImage" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="TOUD_TOUD_KIN" Member="TOUD_KINs" ThisKey="Ouderid" OtherKey="fkOuderId" Type="TOUD_KIN" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[TOUD/KIN]" Member="TOUD_KINs">
+    <Type Name="TOUD_KIN">
+      <Column Name="GebruikerKindId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="fkOuderId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fkKindId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TOUD_KIN_TSO" Member="TSOs" ThisKey="GebruikerKindId" OtherKey="FkGebruikerKindId" Type="TSO" />
+      <Association Name="TKIN_TOUD_KIN" Member="TKIN" ThisKey="fkKindId" OtherKey="KindId" Type="TKIN" IsForeignKey="true" />
+      <Association Name="TOUD_TOUD_KIN" Member="TOUD" ThisKey="fkOuderId" OtherKey="Ouderid" Type="TOUD" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
