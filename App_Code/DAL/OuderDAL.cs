@@ -64,4 +64,10 @@ public class OuderDAL
 
        
     }
+    public int getaantalkinderen(string naamOuder)
+    {
+        var hulprecord = (from a in dc.TOUDs where naamOuder == a.Voornaam select a).Single(); 
+
+        return (from c in dc.TOUD_KINs where hulprecord.Ouderid == c.fkOuderId select c).Count();
+    }
 }

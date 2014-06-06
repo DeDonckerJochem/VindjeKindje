@@ -477,3 +477,14 @@ width: 100%;
     margin-top:25px;
 }
 
+#myDynamicTable {
+float:right;
+margin-right:100px;
+
+}
+
+#myDynamicTable table{
+
+margin: 15px 15px 15px 15px;
+}
+

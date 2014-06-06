@@ -1,25 +1,3 @@
-function addRow() {
-
-    var myName = document.getElementById("name");
-    var age = document.getElementById("age");
-    var table = document.getElementById("myTableData");
-
-    var rowCount = table.rows.length;
-    var row = table.insertRow(rowCount);
-
-    row.insertCell(0).innerHTML = '<input type="button" value = "Delete" onClick="Javacsript:deleteRow(this)">';
-    row.insertCell(1).innerHTML = myName.value;
-    row.insertCell(2).innerHTML = age.value;
-
-}
-
-function deleteRow(obj) {
-
-    var index = obj.parentNode.parentNode.rowIndex;
-    var table = document.getElementById("myTableData");
-    table.deleteRow(index);
-
-}
 
 function addTable() {
 
@@ -31,14 +9,60 @@ function addTable() {
     var tableBody = document.createElement('TBODY');
     table.appendChild(tableBody);
 
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 1; i++) {
         var tr = document.createElement('TR');
         tableBody.appendChild(tr);
 
-        for (var j = 0; j < 4; j++) {
+        for (var j = 0; j < 1; j++) {
             var td = document.createElement('TD');
             td.width = '75';
-            td.appendChild(document.createTextNode("Cell " + i + "," + j));
+            td.appendChild(document.createTextNode("Naam: "));
+
+            tr.appendChild(td);
+        }
+        for (var j = 0; j < 1; j++) {
+            var td = document.createElement('TD');
+            td.width = '75';
+            td.appendChild(document.createTextNode("Macharis "));
+
+            tr.appendChild(td);
+        }
+    }
+    for (var i = 0; i < 1; i++) {
+        var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+
+        for (var j = 0; j < 1; j++) {
+            var td = document.createElement('TD');
+            td.width = '75';
+            td.appendChild(document.createTextNode("Voornaam: "));
+
+            tr.appendChild(td);
+        }
+        for (var j = 0; j < 1; j++) {
+            var td = document.createElement('TD');
+            td.width = '75';
+            td.appendChild(document.createTextNode("Jos: "));
+
+            tr.appendChild(td);
+        }
+    }
+    for (var i = 0; i < 1; i++) {
+        var tr = document.createElement('TR');
+        tableBody.appendChild(tr);
+
+        for (var j = 0; j < 1; j++) {
+            var td = document.createElement('TD');
+            td.width = '150';
+            td.appendChild(document.createTextNode("Geboorte Datum: "));
+
+            tr.appendChild(td);
+        }
+        for (var j = 0; j < 1; j++) {
+            var td = document.createElement('TD');
+            td.width = '150';
+            td.appendChild(document.createTextNode("22/01/2005: "));
+
             tr.appendChild(td);
         }
     }
@@ -46,6 +70,29 @@ function addTable() {
 
 }
 
+
+
+function addImage() {
+    var img = document.createElement("IMG");
+    img.src = "~/images/handje.png";
+    document.getElementById('image').appendChild(img);
+
+
+}
+
+function addButton() {
+ 
+
+    var buttonnode = document.createElement('input');
+    buttonnode.setAttribute('type', 'button');
+    buttonnode.setAttribute('name', 'Details');
+    buttonnode.setAttribute('value', 'Details');
+
+    buttonnode.href = "~/ouder/Kindprofiel.aspx";
+    document.getElementById('button').appendChild(buttonnode);
+
+
+}
 function load() {
 
     console.log("Page load finished");
