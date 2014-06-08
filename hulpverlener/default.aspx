@@ -1,16 +1,24 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="default.aspx.cs" Inherits="hulpverlener_default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<!--Begin van middeblok-->
+        <div class="inner">
+            <!--Begin van links middeblok-->
+            <div class="left-block">
+                <img src="images/cs.png" alt="xx" />
+                <p>
+                    
+                    Een handige vind je kind web applicatie
+                </p>
+            </div>
+            <!--Begin van rechts middeblok-->
+            <div class="right-block">
+                <img src="<%= Page.ResolveUrl("~/images/Voorprent4500.png")%>" />
+                
+            </div>
+        </div>
+    <!--<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>-->
+</asp:Content>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
-    this is the hulpverlener start page
-    </div>
-    </form>
-</body>
-</html>
