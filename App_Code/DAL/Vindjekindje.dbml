@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Armband" Class="VindjekindjeDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=JOCHEM-PC;Initial Catalog=Armband;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ArmbandConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=WDS;Initial Catalog=Armband;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ArmbandConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.TALL" Member="TALLs">
     <Type Name="TALL">
       <Column Name="AllergieId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -96,6 +96,16 @@
       <Association Name="TKIN_TKIN_ALL" Member="TKIN" ThisKey="FkKind" OtherKey="KindId" Type="TKIN" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.[TOUD/KIN]" Member="TOUD_KINs">
+    <Type Name="TOUD_KIN">
+      <Column Name="GebruikerKindId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="fkOuderId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fkKindId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TOUD_KIN_TSO" Member="TSOs" ThisKey="GebruikerKindId" OtherKey="FkGebruikerKindId" Type="TSO" />
+      <Association Name="TKIN_TOUD_KIN" Member="TKIN" ThisKey="fkKindId" OtherKey="KindId" Type="TKIN" IsForeignKey="true" />
+      <Association Name="TOUD_TOUD_KIN" Member="TOUD" ThisKey="fkOuderId" OtherKey="Ouderid" Type="TOUD" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.TOUD" Member="TOUDs">
     <Type Name="TOUD">
       <Column Name="Ouderid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -107,17 +117,8 @@
       <Column Name="Bloedgroep" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Adres" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="OuderImage" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Association Name="TOUD_TOUD_KIN" Member="TOUD_KINs" ThisKey="Ouderid" OtherKey="fkOuderId" Type="TOUD_KIN" />
-    </Type>
-  </Table>
-  <Table Name="dbo.[TOUD/KIN]" Member="TOUD_KINs">
-    <Type Name="TOUD_KIN">
-      <Column Name="GebruikerKindId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="fkOuderId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="fkKindId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="TOUD_KIN_TSO" Member="TSOs" ThisKey="GebruikerKindId" OtherKey="FkGebruikerKindId" Type="TSO" />
-      <Association Name="TKIN_TOUD_KIN" Member="TKIN" ThisKey="fkKindId" OtherKey="KindId" Type="TKIN" IsForeignKey="true" />
-      <Association Name="TOUD_TOUD_KIN" Member="TOUD" ThisKey="fkOuderId" OtherKey="Ouderid" Type="TOUD" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

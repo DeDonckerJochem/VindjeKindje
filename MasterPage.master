@@ -18,75 +18,123 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
+      <script type="text/javascript" id="getCord">
+
+          if (typeof navigator.geolocation === 'undefined') {
+              alert("Geolocation services are not supported by your web browser");
+          }
+
+          else {
+              navigator.geolocation.getCurrentPosition(handleLocation, handleError);
+          }
+
+          function handleLocation(position) {
+
+                      var lat = position.coords.latitude;
+                      //alert(lat);
+                      document.getElementById('<%= latdata.ClientID %>').value = lat;
+
+                        var lon = position.coords.longitude;
+                        //alert(lon);
+                        document.getElementById('<%= londata.ClientID %>').value = lon;
+
+                    }
+
+                    function handleError(error) {
+                        switch (error.code) {
+                            case error.TIMEOUT:
+                                alert('Timeout');
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                alert('Position unavailable');
+                                break;
+                            case error.PERMISSION_DENIED:
+                                alert('Permission denied');
+                                break;
+                            case error.UNKNOWN_ERROR:
+                                alert('Unknown error');
+                                break;
+                        }
+                    }
+                </script>
     <div id="wrapper">
         <!--<div class="container">-->
         <!--Start van de header-->
-       <div id="omslag_head">
-        <div id="header">
-            <img id="logo-Master"src="<%= Page.ResolveUrl("~/images/handklein.png")%>" />
-            <p>Vind je kind</p>
-            <!--<div class="clear-on-mobile"></div>-->
-            <form id="form1" runat="server">
-            <div id="Menu">
-                <asp:LoginView ID="LoginView1" runat="server">
-                    <LoggedInTemplate>
-                        <a id="Home" href="<%= Page.ResolveUrl("~/Default.aspx")%>">Home</a>
-                        <asp:Button ID="hyperLinkButton" OnClick="btnLogout_Click" runat="server" Text="logout" />
-                        <span>
-                            <asp:LoginName ID="LoginName2" runat="server" FormatString="Welcome {0}!" />
-                        </span>
-                    </LoggedInTemplate>
-                    <AnonymousTemplate>
-                        <a id="Home" href="<%= Page.ResolveUrl("~/Default.aspx")%>">Home</a> 
-                        <a href="<%= Page.ResolveUrl("~/Login.aspx")%>">Login</a> 
-                        <!--<a id="registreer" href="<%= Page.ResolveUrl("~/Registreer.aspx")%>">Registreer</a> -->
-                        <a id="noodnummers" href="<%= Page.ResolveUrl("~/Noodnummers.aspx")%>">Noodnummers</a>
-                    </AnonymousTemplate>
-                    <RoleGroups>
-                        <asp:RoleGroup Roles="Arts">
-                            <ContentTemplate>
-                                <a id="Home" href="<%= Page.ResolveUrl("~/Default.aspx")%>">Home</a> 
-                                <a id="profiel" href="Default.aspx">Admin profiel</a>
-                                <asp:Button ID="hyperLinkButton" OnClick="btnLogout_Click" runat="server" Text="logout" />
-                                <span>
-                                    <asp:LoginName ID="LoginName2" runat="server" FormatString="Welcome {0}!" />
-                                </span>
-                            </ContentTemplate>
-                        </asp:RoleGroup>
-                        <asp:RoleGroup Roles="Ouder">
-                            <ContentTemplate>
-                                <a id="Home" href="<%= Page.ResolveUrl("~/Default.aspx")%>">Home</a> 
-                                <a id="profiel" href="<%= Page.ResolveUrl("~/ouder/profiel.aspx")%>">Profiel</a>
-                                <a id="Bandjes" href="<%= Page.ResolveUrl("~/ouder/bandjes.aspx")%>">Bandjes</a>
-                                <asp:Button ID="hyperLinkButton" OnClick="btnLogout_Click" runat="server" Text="logout" />
-                                <span>
-                                    <asp:LoginName ID="LoginName2" runat="server" FormatString="Welcome {0}!" />
-                                </span>
-                            </ContentTemplate>
-                        </asp:RoleGroup>
-                        <asp:RoleGroup Roles="Hulpverlener">
-                            <ContentTemplate>
+        <div id="omslag_head">
+            <div id="header">
+                <img id="logo-Master" src="<%= Page.ResolveUrl("~/images/handklein.png")%>" />
+                <p>Vind je kind</p>
+                <div class="clear-on-mobile"></div>
+                <form id="form1" runat="server">
+                    <div id="Menu">
+                        <asp:LoginView ID="LoginView1" runat="server">
+                            <LoggedInTemplate>
                                 <a id="Home" href="<%= Page.ResolveUrl("~/Default.aspx")%>">Home</a>
-                                <a id="profiel" href="<%= Page.ResolveUrl("~/hulpverlener/profiel.aspx")%>">eigen profiel</a>
-                                 <a id="kindprofiel" href="<%= Page.ResolveUrl("~/hulpverlener/kindprofiel.aspx")%>">kindprofiel</a>
                                 <asp:Button ID="hyperLinkButton" OnClick="btnLogout_Click" runat="server" Text="logout" />
                                 <span>
                                     <asp:LoginName ID="LoginName2" runat="server" FormatString="Welcome {0}!" />
                                 </span>
-                            </ContentTemplate>
-                        </asp:RoleGroup>
-                    </RoleGroups>
-                </asp:LoginView>
+                            </LoggedInTemplate>
+                            <AnonymousTemplate>
+                                <a id="Home" href="<%= Page.ResolveUrl("~/Default.aspx")%>">Home</a>
+                                <a href="<%= Page.ResolveUrl("~/Login.aspx")%>">Login</a>
+                                <!--<a id="registreer" href="<%= Page.ResolveUrl("~/Registreer.aspx")%>">Registreer</a> -->
+                                <a id="noodnummers" href="<%= Page.ResolveUrl("~/Noodnummers.aspx")%>">Noodnummers</a>
+                            </AnonymousTemplate>
+                            <RoleGroups>
+                                <asp:RoleGroup Roles="Arts">
+                                    <ContentTemplate>
+                                        <a id="Home" href="<%= Page.ResolveUrl("~/Default.aspx")%>">Home</a>
+                                        <a id="profiel" href="Default.aspx">Admin profiel</a>
+                                        <asp:Button ID="hyperLinkButton" OnClick="btnLogout_Click" runat="server" Text="logout" />
+                                        <span>
+                                            <asp:LoginName ID="LoginName2" runat="server" FormatString="Welcome {0}!" />
+                                        </span>
+                                    </ContentTemplate>
+                                </asp:RoleGroup>
+                                <asp:RoleGroup Roles="Ouder">
+                                    <ContentTemplate>
+                                        <a id="Home" href="<%= Page.ResolveUrl("~/Default.aspx")%>">Home</a>
+                                        <a id="profiel" href="<%= Page.ResolveUrl("~/ouder/profiel.aspx")%>">Profiel</a>
+                                        <a id="Bandjes" href="<%= Page.ResolveUrl("~/ouder/bandjes.aspx")%>">Bandjes</a>
+                                        <asp:Button ID="hyperLinkButton" OnClick="btnLogout_Click" runat="server" Text="logout" />
+                                        <span>
+                                            <asp:LoginName ID="LoginName2" runat="server" FormatString="Welcome {0}!" />
+                                        </span>
+                                    </ContentTemplate>
+                                </asp:RoleGroup>
+                                <asp:RoleGroup Roles="Hulpverlener">
+                                    <ContentTemplate>
+                                        <a id="Home" href="<%= Page.ResolveUrl("~/Default.aspx")%>">Home</a>
+                                        <a id="profiel" href="<%= Page.ResolveUrl("~/hulpverlener/profiel.aspx")%>">eigen profiel</a>
+                                        <a id="kindprofiel" href="<%= Page.ResolveUrl("~/hulpverlener/kindprofiel.aspx")%>">kindprofiel</a>
+                                        <asp:Button ID="hyperLinkButton" OnClick="btnLogout_Click" runat="server" Text="logout" />
+                                        <span>
+                                            <asp:LoginName ID="LoginName2" runat="server" FormatString="Welcome {0}!" />
+                                        </span>
+                                    </ContentTemplate>
+                                </asp:RoleGroup>
+                            </RoleGroups>
+                        </asp:LoginView>
+                    </div>
+                    <!--<div class="clear-on-mobile"></div>-->
             </div>
-            <!--<div class="clear-on-mobile"></div>-->
         </div>
-       </div>
         <!--wat lege regels om de opmaak te bekomen die ik wil, moet wel nog anders-->
         <div class="clear">
         </div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
-        </form>
+        
+        
+        
+        
+        <!--verborgen veldjes die we gebruiken om de waardes naar de code behind .cs door tegeven-->            
+        <asp:HiddenField ID="latdata" runat="server"></asp:HiddenField>
+        <asp:HiddenField ID="londata" runat="server"></asp:HiddenField>
+        
+        
+        
         <!--een lijn met de klasse die specificieert dat het geen wat nu komt op een nieuwe lijn moet komen.-->
         <div class="clear">
         </div>
@@ -95,8 +143,14 @@
             <!--Begin van inner gedeelte footer-->
             <div class="inner">
                 <p>
-                    No Account?</p>
-                <a href="">Share You're location</a>
+                    No Account?
+                </p>
+                <!--user clicks on button to share he's location with parents-->
+                <!--<a href="" id="btnLocateweg" runat="server" onclick="GetLocation()">Share You're location</a>
+                -->
+                <asp:Button ID="locate" runat="server"  OnClick="btnLocate_Click"  value="Share You're location" Text="Share You're location"/>
+                
+             </form>
                 <ul class="social">
                     <li><a href="http://www.facebook.com/dzyngiri" title="Facebook">
                         <img src="<%= Page.ResolveUrl("~/images/fb.png")%>" alt="Facebook" /></a></li>
@@ -109,8 +163,7 @@
             </div>
             <div class="logo">
                 <p class="copyright">
-                    <span>&copy; 2014 | Special Aid Bracelet | info@vindjekind.be | <a href="https://www.facebook.com">
-                        Facebook</a> | <a href="http://www.twitter.com">Twitter</a></span>
+                    <span>&copy; 2014 | Special Aid Bracelet | info@vindjekind.be | <a href="https://www.facebook.com">Facebook</a> | <a href="http://www.twitter.com">Twitter</a></span>
                 </p>
             </div>
         </div>

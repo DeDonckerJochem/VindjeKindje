@@ -8,6 +8,7 @@
     <div class="inner">
         <!--Begin van middeblok-->
         <div class="center-block">
+             
             <p>
                 <a href="tel:100" title="brandweer">
                     <img src="<%= Page.ResolveUrl("~/images/Untitled-6-05.png")%>" alt="brandweer" /></a><p class="mobilesOnly">Algemeen telefoonnummer voor hulpdiensten: 100</p></p>

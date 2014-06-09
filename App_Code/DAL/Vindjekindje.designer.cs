@@ -60,12 +60,12 @@ namespace DAL
     partial void InsertTKIN_ALL(TKIN_ALL instance);
     partial void UpdateTKIN_ALL(TKIN_ALL instance);
     partial void DeleteTKIN_ALL(TKIN_ALL instance);
-    partial void InsertTOUD(TOUD instance);
-    partial void UpdateTOUD(TOUD instance);
-    partial void DeleteTOUD(TOUD instance);
     partial void InsertTOUD_KIN(TOUD_KIN instance);
     partial void UpdateTOUD_KIN(TOUD_KIN instance);
     partial void DeleteTOUD_KIN(TOUD_KIN instance);
+    partial void InsertTOUD(TOUD instance);
+    partial void UpdateTOUD(TOUD instance);
+    partial void DeleteTOUD(TOUD instance);
     #endregion
 		
 		public VindjekindjeDataContext() : 
@@ -178,19 +178,19 @@ namespace DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<TOUD> TOUDs
-		{
-			get
-			{
-				return this.GetTable<TOUD>();
-			}
-		}
-		
 		public System.Data.Linq.Table<TOUD_KIN> TOUD_KINs
 		{
 			get
 			{
 				return this.GetTable<TOUD_KIN>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TOUD> TOUDs
+		{
+			get
+			{
+				return this.GetTable<TOUD>();
 			}
 		}
 	}
@@ -2129,288 +2129,6 @@ namespace DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TOUD")]
-	public partial class TOUD : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Ouderid;
-		
-		private string _Naam;
-		
-		private string _Voornaam;
-		
-		private string _TelefoonNr;
-		
-		private System.Nullable<int> _MutualiteitsNr;
-		
-		private System.Nullable<System.DateTime> _GebDate;
-		
-		private string _Bloedgroep;
-		
-		private string _Adres;
-		
-		private System.Data.Linq.Binary _OuderImage;
-		
-		private EntitySet<TOUD_KIN> _TOUD_KINs;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnOuderidChanging(int value);
-    partial void OnOuderidChanged();
-    partial void OnNaamChanging(string value);
-    partial void OnNaamChanged();
-    partial void OnVoornaamChanging(string value);
-    partial void OnVoornaamChanged();
-    partial void OnTelefoonNrChanging(string value);
-    partial void OnTelefoonNrChanged();
-    partial void OnMutualiteitsNrChanging(System.Nullable<int> value);
-    partial void OnMutualiteitsNrChanged();
-    partial void OnGebDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnGebDateChanged();
-    partial void OnBloedgroepChanging(string value);
-    partial void OnBloedgroepChanged();
-    partial void OnAdresChanging(string value);
-    partial void OnAdresChanged();
-    partial void OnOuderImageChanging(System.Data.Linq.Binary value);
-    partial void OnOuderImageChanged();
-    #endregion
-		
-		public TOUD()
-		{
-			this._TOUD_KINs = new EntitySet<TOUD_KIN>(new Action<TOUD_KIN>(this.attach_TOUD_KINs), new Action<TOUD_KIN>(this.detach_TOUD_KINs));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ouderid", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Ouderid
-		{
-			get
-			{
-				return this._Ouderid;
-			}
-			set
-			{
-				if ((this._Ouderid != value))
-				{
-					this.OnOuderidChanging(value);
-					this.SendPropertyChanging();
-					this._Ouderid = value;
-					this.SendPropertyChanged("Ouderid");
-					this.OnOuderidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Naam", DbType="VarChar(50)")]
-		public string Naam
-		{
-			get
-			{
-				return this._Naam;
-			}
-			set
-			{
-				if ((this._Naam != value))
-				{
-					this.OnNaamChanging(value);
-					this.SendPropertyChanging();
-					this._Naam = value;
-					this.SendPropertyChanged("Naam");
-					this.OnNaamChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Voornaam", DbType="VarChar(50)")]
-		public string Voornaam
-		{
-			get
-			{
-				return this._Voornaam;
-			}
-			set
-			{
-				if ((this._Voornaam != value))
-				{
-					this.OnVoornaamChanging(value);
-					this.SendPropertyChanging();
-					this._Voornaam = value;
-					this.SendPropertyChanged("Voornaam");
-					this.OnVoornaamChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TelefoonNr", DbType="VarChar(50)")]
-		public string TelefoonNr
-		{
-			get
-			{
-				return this._TelefoonNr;
-			}
-			set
-			{
-				if ((this._TelefoonNr != value))
-				{
-					this.OnTelefoonNrChanging(value);
-					this.SendPropertyChanging();
-					this._TelefoonNr = value;
-					this.SendPropertyChanged("TelefoonNr");
-					this.OnTelefoonNrChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MutualiteitsNr", DbType="Int")]
-		public System.Nullable<int> MutualiteitsNr
-		{
-			get
-			{
-				return this._MutualiteitsNr;
-			}
-			set
-			{
-				if ((this._MutualiteitsNr != value))
-				{
-					this.OnMutualiteitsNrChanging(value);
-					this.SendPropertyChanging();
-					this._MutualiteitsNr = value;
-					this.SendPropertyChanged("MutualiteitsNr");
-					this.OnMutualiteitsNrChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GebDate", DbType="Date")]
-		public System.Nullable<System.DateTime> GebDate
-		{
-			get
-			{
-				return this._GebDate;
-			}
-			set
-			{
-				if ((this._GebDate != value))
-				{
-					this.OnGebDateChanging(value);
-					this.SendPropertyChanging();
-					this._GebDate = value;
-					this.SendPropertyChanged("GebDate");
-					this.OnGebDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bloedgroep", DbType="VarChar(50)")]
-		public string Bloedgroep
-		{
-			get
-			{
-				return this._Bloedgroep;
-			}
-			set
-			{
-				if ((this._Bloedgroep != value))
-				{
-					this.OnBloedgroepChanging(value);
-					this.SendPropertyChanging();
-					this._Bloedgroep = value;
-					this.SendPropertyChanged("Bloedgroep");
-					this.OnBloedgroepChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adres", DbType="VarChar(50)")]
-		public string Adres
-		{
-			get
-			{
-				return this._Adres;
-			}
-			set
-			{
-				if ((this._Adres != value))
-				{
-					this.OnAdresChanging(value);
-					this.SendPropertyChanging();
-					this._Adres = value;
-					this.SendPropertyChanged("Adres");
-					this.OnAdresChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OuderImage", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary OuderImage
-		{
-			get
-			{
-				return this._OuderImage;
-			}
-			set
-			{
-				if ((this._OuderImage != value))
-				{
-					this.OnOuderImageChanging(value);
-					this.SendPropertyChanging();
-					this._OuderImage = value;
-					this.SendPropertyChanged("OuderImage");
-					this.OnOuderImageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TOUD_TOUD_KIN", Storage="_TOUD_KINs", ThisKey="Ouderid", OtherKey="fkOuderId")]
-		public EntitySet<TOUD_KIN> TOUD_KINs
-		{
-			get
-			{
-				return this._TOUD_KINs;
-			}
-			set
-			{
-				this._TOUD_KINs.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_TOUD_KINs(TOUD_KIN entity)
-		{
-			this.SendPropertyChanging();
-			entity.TOUD = this;
-		}
-		
-		private void detach_TOUD_KINs(TOUD_KIN entity)
-		{
-			this.SendPropertyChanging();
-			entity.TOUD = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[TOUD/KIN]")]
 	public partial class TOUD_KIN : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2628,6 +2346,312 @@ namespace DAL
 		{
 			this.SendPropertyChanging();
 			entity.TOUD_KIN = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TOUD")]
+	public partial class TOUD : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Ouderid;
+		
+		private string _Naam;
+		
+		private string _Voornaam;
+		
+		private string _TelefoonNr;
+		
+		private System.Nullable<int> _MutualiteitsNr;
+		
+		private System.Nullable<System.DateTime> _GebDate;
+		
+		private string _Bloedgroep;
+		
+		private string _Adres;
+		
+		private System.Data.Linq.Binary _OuderImage;
+		
+		private string _Email;
+		
+		private EntitySet<TOUD_KIN> _TOUD_KINs;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnOuderidChanging(int value);
+    partial void OnOuderidChanged();
+    partial void OnNaamChanging(string value);
+    partial void OnNaamChanged();
+    partial void OnVoornaamChanging(string value);
+    partial void OnVoornaamChanged();
+    partial void OnTelefoonNrChanging(string value);
+    partial void OnTelefoonNrChanged();
+    partial void OnMutualiteitsNrChanging(System.Nullable<int> value);
+    partial void OnMutualiteitsNrChanged();
+    partial void OnGebDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnGebDateChanged();
+    partial void OnBloedgroepChanging(string value);
+    partial void OnBloedgroepChanged();
+    partial void OnAdresChanging(string value);
+    partial void OnAdresChanged();
+    partial void OnOuderImageChanging(System.Data.Linq.Binary value);
+    partial void OnOuderImageChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    #endregion
+		
+		public TOUD()
+		{
+			this._TOUD_KINs = new EntitySet<TOUD_KIN>(new Action<TOUD_KIN>(this.attach_TOUD_KINs), new Action<TOUD_KIN>(this.detach_TOUD_KINs));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ouderid", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Ouderid
+		{
+			get
+			{
+				return this._Ouderid;
+			}
+			set
+			{
+				if ((this._Ouderid != value))
+				{
+					this.OnOuderidChanging(value);
+					this.SendPropertyChanging();
+					this._Ouderid = value;
+					this.SendPropertyChanged("Ouderid");
+					this.OnOuderidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Naam", DbType="VarChar(50)")]
+		public string Naam
+		{
+			get
+			{
+				return this._Naam;
+			}
+			set
+			{
+				if ((this._Naam != value))
+				{
+					this.OnNaamChanging(value);
+					this.SendPropertyChanging();
+					this._Naam = value;
+					this.SendPropertyChanged("Naam");
+					this.OnNaamChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Voornaam", DbType="VarChar(50)")]
+		public string Voornaam
+		{
+			get
+			{
+				return this._Voornaam;
+			}
+			set
+			{
+				if ((this._Voornaam != value))
+				{
+					this.OnVoornaamChanging(value);
+					this.SendPropertyChanging();
+					this._Voornaam = value;
+					this.SendPropertyChanged("Voornaam");
+					this.OnVoornaamChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TelefoonNr", DbType="VarChar(50)")]
+		public string TelefoonNr
+		{
+			get
+			{
+				return this._TelefoonNr;
+			}
+			set
+			{
+				if ((this._TelefoonNr != value))
+				{
+					this.OnTelefoonNrChanging(value);
+					this.SendPropertyChanging();
+					this._TelefoonNr = value;
+					this.SendPropertyChanged("TelefoonNr");
+					this.OnTelefoonNrChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MutualiteitsNr", DbType="Int")]
+		public System.Nullable<int> MutualiteitsNr
+		{
+			get
+			{
+				return this._MutualiteitsNr;
+			}
+			set
+			{
+				if ((this._MutualiteitsNr != value))
+				{
+					this.OnMutualiteitsNrChanging(value);
+					this.SendPropertyChanging();
+					this._MutualiteitsNr = value;
+					this.SendPropertyChanged("MutualiteitsNr");
+					this.OnMutualiteitsNrChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GebDate", DbType="Date")]
+		public System.Nullable<System.DateTime> GebDate
+		{
+			get
+			{
+				return this._GebDate;
+			}
+			set
+			{
+				if ((this._GebDate != value))
+				{
+					this.OnGebDateChanging(value);
+					this.SendPropertyChanging();
+					this._GebDate = value;
+					this.SendPropertyChanged("GebDate");
+					this.OnGebDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bloedgroep", DbType="VarChar(50)")]
+		public string Bloedgroep
+		{
+			get
+			{
+				return this._Bloedgroep;
+			}
+			set
+			{
+				if ((this._Bloedgroep != value))
+				{
+					this.OnBloedgroepChanging(value);
+					this.SendPropertyChanging();
+					this._Bloedgroep = value;
+					this.SendPropertyChanged("Bloedgroep");
+					this.OnBloedgroepChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adres", DbType="VarChar(50)")]
+		public string Adres
+		{
+			get
+			{
+				return this._Adres;
+			}
+			set
+			{
+				if ((this._Adres != value))
+				{
+					this.OnAdresChanging(value);
+					this.SendPropertyChanging();
+					this._Adres = value;
+					this.SendPropertyChanged("Adres");
+					this.OnAdresChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OuderImage", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary OuderImage
+		{
+			get
+			{
+				return this._OuderImage;
+			}
+			set
+			{
+				if ((this._OuderImage != value))
+				{
+					this.OnOuderImageChanging(value);
+					this.SendPropertyChanging();
+					this._OuderImage = value;
+					this.SendPropertyChanged("OuderImage");
+					this.OnOuderImageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(100)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TOUD_TOUD_KIN", Storage="_TOUD_KINs", ThisKey="Ouderid", OtherKey="fkOuderId")]
+		public EntitySet<TOUD_KIN> TOUD_KINs
+		{
+			get
+			{
+				return this._TOUD_KINs;
+			}
+			set
+			{
+				this._TOUD_KINs.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_TOUD_KINs(TOUD_KIN entity)
+		{
+			this.SendPropertyChanging();
+			entity.TOUD = this;
+		}
+		
+		private void detach_TOUD_KINs(TOUD_KIN entity)
+		{
+			this.SendPropertyChanging();
+			entity.TOUD = null;
 		}
 	}
 }

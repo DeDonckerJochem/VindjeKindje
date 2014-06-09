@@ -1,7 +1,7 @@
 
-function addTable() {
+function addTable(aantal) {
 
-    var myTableDiv = document.getElementById("myDynamicTable");
+    var myTableDiv = document.getElementById("myDynamicTable"+aantal);
 
     var table = document.createElement('TABLE');
     table.border = '1';
@@ -22,7 +22,9 @@ function addTable() {
         }
         for (var j = 0; j < 1; j++) {
             var td = document.createElement('TD');
+            
             td.width = '75';
+            td.setAttribute('id', 'Naam'+aantal);
             td.appendChild(document.createTextNode("Macharis "));
 
             tr.appendChild(td);
@@ -69,27 +71,44 @@ function addTable() {
     myTableDiv.appendChild(table);
 
 }
+/*function adddiv(aantal) {
+
+    var iDiv = document.createElement('div');
+    iDiv.id = 'block'+aantal;
+    iDiv.className = 'block'+aantal;
+
+}*/
 
 
-
-function addImage() {
+function addImage(aantal) {
     var img = document.createElement("IMG");
-    img.src = "~/images/handje.png";
-    document.getElementById('image').appendChild(img);
+    img.style.border = "1px solid #000";
+    img.style.width = "200px";
+    img.style.height = "200px";
+    img.style.margin = "15px";
+    img.src = ("Profile-pictures-children/kind.jpg");
+    img.setAttribute('id', 'image' + aantal);
+    //document.getElementById('image').src = "~/images/handje.png";
+    document.getElementById('image'+aantal).appendChild(img);
+    
 
 
 }
 
-function addButton() {
+function addButton(aantal) {
  
 
     var buttonnode = document.createElement('input');
     buttonnode.setAttribute('type', 'button');
-    buttonnode.setAttribute('name', 'Details');
-    buttonnode.setAttribute('value', 'Details');
-
-    buttonnode.href = "~/ouder/Kindprofiel.aspx";
-    document.getElementById('button').appendChild(buttonnode);
+    buttonnode.setAttribute('name', 'Kind Details');
+    buttonnode.setAttribute('value', 'Kind Details');
+    
+    buttonnode.setAttribute('id', 'Button'+aantal);
+    
+    
+    buttonnode.setAttribute('href','../ouder/Kindprofiel.aspx');
+    
+    document.getElementById('button'+aantal).appendChild(buttonnode);
 
 
 }
