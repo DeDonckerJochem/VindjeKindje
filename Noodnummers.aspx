@@ -10,30 +10,30 @@
         <div class="center-block">
              
             <p>
-                <a href="tel:100" title="brandweer">
-                    <img src="<%= Page.ResolveUrl("~/images/Untitled-6-05.png")%>" alt="brandweer" /></a><p class="mobilesOnly">Algemeen telefoonnummer voor hulpdiensten: 100</p></p>
+                <a href="tel:100" title="brandweer tel: 100">
+                    <img src="<%= Page.ResolveUrl("~/images/Untitled-6-05.png")%>" alt="brandweer" /></a><p class="mobilesOnly"></p></p>
             
             
             <div class="clear">
             </div>
             <p>
-                <a href="tel:070245245" title="anti gif centrum">
+                <a href="tel:070245245" title="anti gif centrum tel:070245245">
                     <img src="<%= Page.ResolveUrl("~/images/Untitled-6-02.png")%>" alt="anti gif centrum" /></a></p>
             
-            <p class="mobilesOnly">Telefoon nummer voor het antigif centrum: </p>
+            
             <div class="clear">
             </div>
             <p>
-                <a href="tel:116000" title="child focus">
+                <a href="tel:116000" title="child focus tel: 116000">
                     <img src="<%= Page.ResolveUrl("~/images/Untitled-6-04.png")%>" alt="child focus" /></a></p>
            
-            <p class="mobilesOnly">Europees telefoon nummer voor Child Focus: 116 000 </p>
+            
             <div class="clear">
             </div>
             <p>
-                <a href="tel:100" title="politie">
+                <a href="tel:100" title="politie tel: 100">
                     <img src="<%= Page.ResolveUrl("~/images/Untitled-6-03.png")%>" alt="politie" /></a></p>
-            <p class="mobilesOnly">Algemeen telefoonnummer voor hulpdiensten: 100</p>
+            
             <div class="clear">
             </div>
         </div>

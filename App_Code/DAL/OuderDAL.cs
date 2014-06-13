@@ -68,7 +68,7 @@ public class OuderDAL
     {
         var hulprecord = (from a in dc.TOUDs where naamOuder == a.Voornaam select a).Single(); 
 
-        return (from c in dc.TOUD_KINs where hulprecord.Ouderid == c.fkOuderId select c).Count();
+        return (from c in dc.TOUD_KINs where hulprecord.Ouderid == c.FkOuderId select c).Count();
     }
 
     /*public bool GetCompleteKind(out DAL.TKIN kind, int ouderid)
@@ -91,15 +91,15 @@ public class OuderDAL
 
     public List<DAL.TKIN> GetAlleKinderen(int ouderid)
     {
-        var query = (from kindjes in dc.TKINs join x in dc.TOUD_KINs on kindjes.KindId equals x.fkKindId where x.fkOuderId == ouderid  select kindjes).ToList();
+        var query = (from kindjes in dc.TKINs join x in dc.TOUD_KINs on kindjes.KindId equals x.FkKindId where x.FkOuderId == ouderid  select kindjes).ToList();
         return query;
 
     }
 
-    public string getOuderEmailAdress(int kindid)
+    public string getOuderEmailAdress(Guid kindid)
     {
         
-        var result = (from a in dc.TOUD_KINs join b in dc.TOUDs on a.fkOuderId equals b.Ouderid where a.fkKindId == kindid select b.Email).Single();
+        var result = (from a in dc.TOUD_KINs join b in dc.TOUDs on a.FkOuderId equals b.Ouderid where a.FkKindId == kindid select b.Email).Single();
         return result;
     }
 }

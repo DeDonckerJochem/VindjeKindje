@@ -6,7 +6,17 @@
    <div id="omslag_center">
     <div id="center">
         <div id="links-profiel">
-            <img src="<%= Page.ResolveUrl("~/images/headshot.jpg")%>" alt="Profile Picture" style="max-height: 205px; max-width: 267px;"  />
+            <asp:GridView ID="gvDetails" runat="server" AutoGenerateColumns="false">
+                <Columns>
+                    <asp:TemplateField HeaderText="Profiel foto">                   
+                        <ItemTemplate>
+                            <asp:Image ID="ImageName" ImageUrl='<%# "Handler.ashx?ProfielFotoId="+ Eval("ProfielFotoId") %>' runat="server"
+                                Height="200px" Width="200px" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
+
         </div>
         <div id="rechts-profiel">
         <h1>General information:</h1>

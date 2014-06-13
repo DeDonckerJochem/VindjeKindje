@@ -24,7 +24,8 @@ function addTable(aantal) {
             var td = document.createElement('TD');
             
             td.width = '75';
-            td.setAttribute('id', 'Naam'+aantal);
+            td.setAttribute('id', 'Naam' + aantal);
+            td.setAttribute('runat', 'server');
             td.appendChild(document.createTextNode("Macharis "));
 
             tr.appendChild(td);
@@ -71,14 +72,6 @@ function addTable(aantal) {
     myTableDiv.appendChild(table);
 
 }
-/*function adddiv(aantal) {
-
-    var iDiv = document.createElement('div');
-    iDiv.id = 'block'+aantal;
-    iDiv.className = 'block'+aantal;
-
-}*/
-
 
 function addImage(aantal) {
     var img = document.createElement("IMG");

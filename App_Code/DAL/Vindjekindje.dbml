@@ -15,13 +15,13 @@
       <Column Name="FkGebruikerKindId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="FkGemeenteId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="TGEM_TSO" Member="TGEM" ThisKey="FkGemeenteId" OtherKey="GemeenteId" Type="TGEM" IsForeignKey="true" />
-      <Association Name="TOUD_KIN_TSO" Member="TOUD_KIN" ThisKey="FkGebruikerKindId" OtherKey="GebruikerKindId" Type="TOUD_KIN" IsForeignKey="true" />
+      <Association Name="TOUD_KIN_TSO" Member="TOUD_KIN" ThisKey="FkGebruikerKindId" OtherKey="GebruikerKind" Type="TOUD_KIN" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TARM" Member="TARMs">
     <Type Name="TARM">
       <Column Name="ArmbandId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FkKindId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FkKindId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Association Name="TARM_TARM_HUL" Member="TARM_HULs" ThisKey="ArmbandId" OtherKey="FkArmbandId" Type="TARM_HUL" />
       <Association Name="TKIN_TARM" Member="TKIN" ThisKey="FkKindId" OtherKey="KindId" Type="TKIN" IsForeignKey="true" />
     </Type>
@@ -73,16 +73,17 @@
   </Table>
   <Table Name="dbo.TKIN" Member="TKINs">
     <Type Name="TKIN">
-      <Column Name="KindId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="KindId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Naam" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Voornaam" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="GebDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Adres" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Adres" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="FkBloedGroepId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="FkHuisArts" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ProfielFoto" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ProfielFotoId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="TKIN_TARM" Member="TARMs" ThisKey="KindId" OtherKey="FkKindId" Type="TARM" />
-      <Association Name="TKIN_TKIN_ALL" Member="TKIN_ALLs" ThisKey="KindId" OtherKey="FkKind" Type="TKIN_ALL" />
-      <Association Name="TKIN_TOUD_KIN" Member="TOUD_KINs" ThisKey="KindId" OtherKey="fkKindId" Type="TOUD_KIN" />
+      <Association Name="TKIN_TOUD_KIN" Member="TOUD_KINs" ThisKey="KindId" OtherKey="FkKindId" Type="TOUD_KIN" />
       <Association Name="TART_TKIN" Member="TART" ThisKey="FkHuisArts" OtherKey="ArtsID" Type="TART" IsForeignKey="true" />
       <Association Name="TBLO_TKIN" Member="TBLO" ThisKey="FkBloedGroepId" OtherKey="BloedGroepId" Type="TBLO" IsForeignKey="true" />
     </Type>
@@ -93,17 +94,6 @@
       <Column Name="FkAllergie" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="FkKind" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="TALL_TKIN_ALL" Member="TALL" ThisKey="FkAllergie" OtherKey="AllergieId" Type="TALL" IsForeignKey="true" />
-      <Association Name="TKIN_TKIN_ALL" Member="TKIN" ThisKey="FkKind" OtherKey="KindId" Type="TKIN" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.[TOUD/KIN]" Member="TOUD_KINs">
-    <Type Name="TOUD_KIN">
-      <Column Name="GebruikerKindId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="fkOuderId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="fkKindId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="TOUD_KIN_TSO" Member="TSOs" ThisKey="GebruikerKindId" OtherKey="FkGebruikerKindId" Type="TSO" />
-      <Association Name="TKIN_TOUD_KIN" Member="TKIN" ThisKey="fkKindId" OtherKey="KindId" Type="TKIN" IsForeignKey="true" />
-      <Association Name="TOUD_TOUD_KIN" Member="TOUD" ThisKey="fkOuderId" OtherKey="Ouderid" Type="TOUD" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TOUD" Member="TOUDs">
@@ -118,7 +108,17 @@
       <Column Name="Adres" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="OuderImage" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Association Name="TOUD_TOUD_KIN" Member="TOUD_KINs" ThisKey="Ouderid" OtherKey="fkOuderId" Type="TOUD_KIN" />
+      <Association Name="TOUD_TOUD_KIN" Member="TOUD_KINs" ThisKey="Ouderid" OtherKey="FkOuderId" Type="TOUD_KIN" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[TOUD/KIN]" Member="TOUD_KINs">
+    <Type Name="TOUD_KIN">
+      <Column Name="GebruikerKind" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FkKindId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="FkOuderId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TOUD_KIN_TSO" Member="TSOs" ThisKey="GebruikerKind" OtherKey="FkGebruikerKindId" Type="TSO" />
+      <Association Name="TKIN_TOUD_KIN" Member="TKIN" ThisKey="FkKindId" OtherKey="KindId" Type="TKIN" IsForeignKey="true" />
+      <Association Name="TOUD_TOUD_KIN" Member="TOUD" ThisKey="FkOuderId" OtherKey="Ouderid" Type="TOUD" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

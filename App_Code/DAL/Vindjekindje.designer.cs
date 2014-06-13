@@ -60,12 +60,12 @@ namespace DAL
     partial void InsertTKIN_ALL(TKIN_ALL instance);
     partial void UpdateTKIN_ALL(TKIN_ALL instance);
     partial void DeleteTKIN_ALL(TKIN_ALL instance);
-    partial void InsertTOUD_KIN(TOUD_KIN instance);
-    partial void UpdateTOUD_KIN(TOUD_KIN instance);
-    partial void DeleteTOUD_KIN(TOUD_KIN instance);
     partial void InsertTOUD(TOUD instance);
     partial void UpdateTOUD(TOUD instance);
     partial void DeleteTOUD(TOUD instance);
+    partial void InsertTOUD_KIN(TOUD_KIN instance);
+    partial void UpdateTOUD_KIN(TOUD_KIN instance);
+    partial void DeleteTOUD_KIN(TOUD_KIN instance);
     #endregion
 		
 		public VindjekindjeDataContext() : 
@@ -178,19 +178,19 @@ namespace DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<TOUD_KIN> TOUD_KINs
-		{
-			get
-			{
-				return this.GetTable<TOUD_KIN>();
-			}
-		}
-		
 		public System.Data.Linq.Table<TOUD> TOUDs
 		{
 			get
 			{
 				return this.GetTable<TOUD>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TOUD_KIN> TOUD_KINs
+		{
+			get
+			{
+				return this.GetTable<TOUD_KIN>();
 			}
 		}
 	}
@@ -494,7 +494,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TOUD_KIN_TSO", Storage="_TOUD_KIN", ThisKey="FkGebruikerKindId", OtherKey="GebruikerKindId", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TOUD_KIN_TSO", Storage="_TOUD_KIN", ThisKey="FkGebruikerKindId", OtherKey="GebruikerKind", IsForeignKey=true)]
 		public TOUD_KIN TOUD_KIN
 		{
 			get
@@ -517,7 +517,7 @@ namespace DAL
 					if ((value != null))
 					{
 						value.TSOs.Add(this);
-						this._FkGebruikerKindId = value.GebruikerKindId;
+						this._FkGebruikerKindId = value.GebruikerKind;
 					}
 					else
 					{
@@ -557,7 +557,7 @@ namespace DAL
 		
 		private int _ArmbandId;
 		
-		private System.Nullable<int> _FkKindId;
+		private System.Nullable<System.Guid> _FkKindId;
 		
 		private EntitySet<TARM_HUL> _TARM_HULs;
 		
@@ -569,7 +569,7 @@ namespace DAL
     partial void OnCreated();
     partial void OnArmbandIdChanging(int value);
     partial void OnArmbandIdChanged();
-    partial void OnFkKindIdChanging(System.Nullable<int> value);
+    partial void OnFkKindIdChanging(System.Nullable<System.Guid> value);
     partial void OnFkKindIdChanged();
     #endregion
 		
@@ -600,8 +600,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FkKindId", DbType="Int")]
-		public System.Nullable<int> FkKindId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FkKindId", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> FkKindId
 		{
 			get
 			{
@@ -664,7 +664,7 @@ namespace DAL
 					}
 					else
 					{
-						this._FkKindId = default(Nullable<int>);
+						this._FkKindId = default(Nullable<System.Guid>);
 					}
 					this.SendPropertyChanged("TKIN");
 				}
@@ -1571,7 +1571,7 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _KindId;
+		private System.Guid _KindId;
 		
 		private string _Naam;
 		
@@ -1585,9 +1585,11 @@ namespace DAL
 		
 		private System.Nullable<int> _FkHuisArts;
 		
-		private EntitySet<TARM> _TARMs;
+		private System.Data.Linq.Binary _ProfielFoto;
 		
-		private EntitySet<TKIN_ALL> _TKIN_ALLs;
+		private System.Nullable<int> _ProfielFotoId;
+		
+		private EntitySet<TARM> _TARMs;
 		
 		private EntitySet<TOUD_KIN> _TOUD_KINs;
 		
@@ -1599,7 +1601,7 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnKindIdChanging(int value);
+    partial void OnKindIdChanging(System.Guid value);
     partial void OnKindIdChanged();
     partial void OnNaamChanging(string value);
     partial void OnNaamChanged();
@@ -1613,20 +1615,23 @@ namespace DAL
     partial void OnFkBloedGroepIdChanged();
     partial void OnFkHuisArtsChanging(System.Nullable<int> value);
     partial void OnFkHuisArtsChanged();
+    partial void OnProfielFotoChanging(System.Data.Linq.Binary value);
+    partial void OnProfielFotoChanged();
+    partial void OnProfielFotoIdChanging(System.Nullable<int> value);
+    partial void OnProfielFotoIdChanged();
     #endregion
 		
 		public TKIN()
 		{
 			this._TARMs = new EntitySet<TARM>(new Action<TARM>(this.attach_TARMs), new Action<TARM>(this.detach_TARMs));
-			this._TKIN_ALLs = new EntitySet<TKIN_ALL>(new Action<TKIN_ALL>(this.attach_TKIN_ALLs), new Action<TKIN_ALL>(this.detach_TKIN_ALLs));
 			this._TOUD_KINs = new EntitySet<TOUD_KIN>(new Action<TOUD_KIN>(this.attach_TOUD_KINs), new Action<TOUD_KIN>(this.detach_TOUD_KINs));
 			this._TART = default(EntityRef<TART>);
 			this._TBLO = default(EntityRef<TBLO>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KindId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int KindId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KindId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid KindId
 		{
 			get
 			{
@@ -1705,7 +1710,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adres", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adres", DbType="VarChar(100)")]
 		public string Adres
 		{
 			get
@@ -1773,6 +1778,46 @@ namespace DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProfielFoto", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary ProfielFoto
+		{
+			get
+			{
+				return this._ProfielFoto;
+			}
+			set
+			{
+				if ((this._ProfielFoto != value))
+				{
+					this.OnProfielFotoChanging(value);
+					this.SendPropertyChanging();
+					this._ProfielFoto = value;
+					this.SendPropertyChanged("ProfielFoto");
+					this.OnProfielFotoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProfielFotoId", DbType="Int")]
+		public System.Nullable<int> ProfielFotoId
+		{
+			get
+			{
+				return this._ProfielFotoId;
+			}
+			set
+			{
+				if ((this._ProfielFotoId != value))
+				{
+					this.OnProfielFotoIdChanging(value);
+					this.SendPropertyChanging();
+					this._ProfielFotoId = value;
+					this.SendPropertyChanged("ProfielFotoId");
+					this.OnProfielFotoIdChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TKIN_TARM", Storage="_TARMs", ThisKey="KindId", OtherKey="FkKindId")]
 		public EntitySet<TARM> TARMs
 		{
@@ -1786,20 +1831,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TKIN_TKIN_ALL", Storage="_TKIN_ALLs", ThisKey="KindId", OtherKey="FkKind")]
-		public EntitySet<TKIN_ALL> TKIN_ALLs
-		{
-			get
-			{
-				return this._TKIN_ALLs;
-			}
-			set
-			{
-				this._TKIN_ALLs.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TKIN_TOUD_KIN", Storage="_TOUD_KINs", ThisKey="KindId", OtherKey="fkKindId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TKIN_TOUD_KIN", Storage="_TOUD_KINs", ThisKey="KindId", OtherKey="FkKindId")]
 		public EntitySet<TOUD_KIN> TOUD_KINs
 		{
 			get
@@ -1912,18 +1944,6 @@ namespace DAL
 			entity.TKIN = null;
 		}
 		
-		private void attach_TKIN_ALLs(TKIN_ALL entity)
-		{
-			this.SendPropertyChanging();
-			entity.TKIN = this;
-		}
-		
-		private void detach_TKIN_ALLs(TKIN_ALL entity)
-		{
-			this.SendPropertyChanging();
-			entity.TKIN = null;
-		}
-		
 		private void attach_TOUD_KINs(TOUD_KIN entity)
 		{
 			this.SendPropertyChanging();
@@ -1951,8 +1971,6 @@ namespace DAL
 		
 		private EntityRef<TALL> _TALL;
 		
-		private EntityRef<TKIN> _TKIN;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1968,7 +1986,6 @@ namespace DAL
 		public TKIN_ALL()
 		{
 			this._TALL = default(EntityRef<TALL>);
-			this._TKIN = default(EntityRef<TKIN>);
 			OnCreated();
 		}
 		
@@ -2027,10 +2044,6 @@ namespace DAL
 			{
 				if ((this._FkKind != value))
 				{
-					if (this._TKIN.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnFkKindChanging(value);
 					this.SendPropertyChanging();
 					this._FkKind = value;
@@ -2074,40 +2087,6 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TKIN_TKIN_ALL", Storage="_TKIN", ThisKey="FkKind", OtherKey="KindId", IsForeignKey=true)]
-		public TKIN TKIN
-		{
-			get
-			{
-				return this._TKIN.Entity;
-			}
-			set
-			{
-				TKIN previousValue = this._TKIN.Entity;
-				if (((previousValue != value) 
-							|| (this._TKIN.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TKIN.Entity = null;
-						previousValue.TKIN_ALLs.Remove(this);
-					}
-					this._TKIN.Entity = value;
-					if ((value != null))
-					{
-						value.TKIN_ALLs.Add(this);
-						this._FkKind = value.KindId;
-					}
-					else
-					{
-						this._FkKind = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("TKIN");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2126,226 +2105,6 @@ namespace DAL
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[TOUD/KIN]")]
-	public partial class TOUD_KIN : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _GebruikerKindId;
-		
-		private System.Nullable<int> _fkOuderId;
-		
-		private System.Nullable<int> _fkKindId;
-		
-		private EntitySet<TSO> _TSOs;
-		
-		private EntityRef<TKIN> _TKIN;
-		
-		private EntityRef<TOUD> _TOUD;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnGebruikerKindIdChanging(int value);
-    partial void OnGebruikerKindIdChanged();
-    partial void OnfkOuderIdChanging(System.Nullable<int> value);
-    partial void OnfkOuderIdChanged();
-    partial void OnfkKindIdChanging(System.Nullable<int> value);
-    partial void OnfkKindIdChanged();
-    #endregion
-		
-		public TOUD_KIN()
-		{
-			this._TSOs = new EntitySet<TSO>(new Action<TSO>(this.attach_TSOs), new Action<TSO>(this.detach_TSOs));
-			this._TKIN = default(EntityRef<TKIN>);
-			this._TOUD = default(EntityRef<TOUD>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GebruikerKindId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int GebruikerKindId
-		{
-			get
-			{
-				return this._GebruikerKindId;
-			}
-			set
-			{
-				if ((this._GebruikerKindId != value))
-				{
-					this.OnGebruikerKindIdChanging(value);
-					this.SendPropertyChanging();
-					this._GebruikerKindId = value;
-					this.SendPropertyChanged("GebruikerKindId");
-					this.OnGebruikerKindIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fkOuderId", DbType="Int")]
-		public System.Nullable<int> fkOuderId
-		{
-			get
-			{
-				return this._fkOuderId;
-			}
-			set
-			{
-				if ((this._fkOuderId != value))
-				{
-					if (this._TOUD.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnfkOuderIdChanging(value);
-					this.SendPropertyChanging();
-					this._fkOuderId = value;
-					this.SendPropertyChanged("fkOuderId");
-					this.OnfkOuderIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fkKindId", DbType="Int")]
-		public System.Nullable<int> fkKindId
-		{
-			get
-			{
-				return this._fkKindId;
-			}
-			set
-			{
-				if ((this._fkKindId != value))
-				{
-					if (this._TKIN.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnfkKindIdChanging(value);
-					this.SendPropertyChanging();
-					this._fkKindId = value;
-					this.SendPropertyChanged("fkKindId");
-					this.OnfkKindIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TOUD_KIN_TSO", Storage="_TSOs", ThisKey="GebruikerKindId", OtherKey="FkGebruikerKindId")]
-		public EntitySet<TSO> TSOs
-		{
-			get
-			{
-				return this._TSOs;
-			}
-			set
-			{
-				this._TSOs.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TKIN_TOUD_KIN", Storage="_TKIN", ThisKey="fkKindId", OtherKey="KindId", IsForeignKey=true)]
-		public TKIN TKIN
-		{
-			get
-			{
-				return this._TKIN.Entity;
-			}
-			set
-			{
-				TKIN previousValue = this._TKIN.Entity;
-				if (((previousValue != value) 
-							|| (this._TKIN.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TKIN.Entity = null;
-						previousValue.TOUD_KINs.Remove(this);
-					}
-					this._TKIN.Entity = value;
-					if ((value != null))
-					{
-						value.TOUD_KINs.Add(this);
-						this._fkKindId = value.KindId;
-					}
-					else
-					{
-						this._fkKindId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("TKIN");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TOUD_TOUD_KIN", Storage="_TOUD", ThisKey="fkOuderId", OtherKey="Ouderid", IsForeignKey=true)]
-		public TOUD TOUD
-		{
-			get
-			{
-				return this._TOUD.Entity;
-			}
-			set
-			{
-				TOUD previousValue = this._TOUD.Entity;
-				if (((previousValue != value) 
-							|| (this._TOUD.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TOUD.Entity = null;
-						previousValue.TOUD_KINs.Remove(this);
-					}
-					this._TOUD.Entity = value;
-					if ((value != null))
-					{
-						value.TOUD_KINs.Add(this);
-						this._fkOuderId = value.Ouderid;
-					}
-					else
-					{
-						this._fkOuderId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("TOUD");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_TSOs(TSO entity)
-		{
-			this.SendPropertyChanging();
-			entity.TOUD_KIN = this;
-		}
-		
-		private void detach_TSOs(TSO entity)
-		{
-			this.SendPropertyChanging();
-			entity.TOUD_KIN = null;
 		}
 	}
 	
@@ -2609,7 +2368,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TOUD_TOUD_KIN", Storage="_TOUD_KINs", ThisKey="Ouderid", OtherKey="fkOuderId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TOUD_TOUD_KIN", Storage="_TOUD_KINs", ThisKey="Ouderid", OtherKey="FkOuderId")]
 		public EntitySet<TOUD_KIN> TOUD_KINs
 		{
 			get
@@ -2652,6 +2411,226 @@ namespace DAL
 		{
 			this.SendPropertyChanging();
 			entity.TOUD = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[TOUD/KIN]")]
+	public partial class TOUD_KIN : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _GebruikerKind;
+		
+		private System.Nullable<System.Guid> _FkKindId;
+		
+		private System.Nullable<int> _FkOuderId;
+		
+		private EntitySet<TSO> _TSOs;
+		
+		private EntityRef<TKIN> _TKIN;
+		
+		private EntityRef<TOUD> _TOUD;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnGebruikerKindChanging(int value);
+    partial void OnGebruikerKindChanged();
+    partial void OnFkKindIdChanging(System.Nullable<System.Guid> value);
+    partial void OnFkKindIdChanged();
+    partial void OnFkOuderIdChanging(System.Nullable<int> value);
+    partial void OnFkOuderIdChanged();
+    #endregion
+		
+		public TOUD_KIN()
+		{
+			this._TSOs = new EntitySet<TSO>(new Action<TSO>(this.attach_TSOs), new Action<TSO>(this.detach_TSOs));
+			this._TKIN = default(EntityRef<TKIN>);
+			this._TOUD = default(EntityRef<TOUD>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GebruikerKind", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int GebruikerKind
+		{
+			get
+			{
+				return this._GebruikerKind;
+			}
+			set
+			{
+				if ((this._GebruikerKind != value))
+				{
+					this.OnGebruikerKindChanging(value);
+					this.SendPropertyChanging();
+					this._GebruikerKind = value;
+					this.SendPropertyChanged("GebruikerKind");
+					this.OnGebruikerKindChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FkKindId", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> FkKindId
+		{
+			get
+			{
+				return this._FkKindId;
+			}
+			set
+			{
+				if ((this._FkKindId != value))
+				{
+					if (this._TKIN.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFkKindIdChanging(value);
+					this.SendPropertyChanging();
+					this._FkKindId = value;
+					this.SendPropertyChanged("FkKindId");
+					this.OnFkKindIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FkOuderId", DbType="Int")]
+		public System.Nullable<int> FkOuderId
+		{
+			get
+			{
+				return this._FkOuderId;
+			}
+			set
+			{
+				if ((this._FkOuderId != value))
+				{
+					if (this._TOUD.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFkOuderIdChanging(value);
+					this.SendPropertyChanging();
+					this._FkOuderId = value;
+					this.SendPropertyChanged("FkOuderId");
+					this.OnFkOuderIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TOUD_KIN_TSO", Storage="_TSOs", ThisKey="GebruikerKind", OtherKey="FkGebruikerKindId")]
+		public EntitySet<TSO> TSOs
+		{
+			get
+			{
+				return this._TSOs;
+			}
+			set
+			{
+				this._TSOs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TKIN_TOUD_KIN", Storage="_TKIN", ThisKey="FkKindId", OtherKey="KindId", IsForeignKey=true)]
+		public TKIN TKIN
+		{
+			get
+			{
+				return this._TKIN.Entity;
+			}
+			set
+			{
+				TKIN previousValue = this._TKIN.Entity;
+				if (((previousValue != value) 
+							|| (this._TKIN.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TKIN.Entity = null;
+						previousValue.TOUD_KINs.Remove(this);
+					}
+					this._TKIN.Entity = value;
+					if ((value != null))
+					{
+						value.TOUD_KINs.Add(this);
+						this._FkKindId = value.KindId;
+					}
+					else
+					{
+						this._FkKindId = default(Nullable<System.Guid>);
+					}
+					this.SendPropertyChanged("TKIN");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TOUD_TOUD_KIN", Storage="_TOUD", ThisKey="FkOuderId", OtherKey="Ouderid", IsForeignKey=true)]
+		public TOUD TOUD
+		{
+			get
+			{
+				return this._TOUD.Entity;
+			}
+			set
+			{
+				TOUD previousValue = this._TOUD.Entity;
+				if (((previousValue != value) 
+							|| (this._TOUD.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TOUD.Entity = null;
+						previousValue.TOUD_KINs.Remove(this);
+					}
+					this._TOUD.Entity = value;
+					if ((value != null))
+					{
+						value.TOUD_KINs.Add(this);
+						this._FkOuderId = value.Ouderid;
+					}
+					else
+					{
+						this._FkOuderId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("TOUD");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_TSOs(TSO entity)
+		{
+			this.SendPropertyChanging();
+			entity.TOUD_KIN = this;
+		}
+		
+		private void detach_TSOs(TSO entity)
+		{
+			this.SendPropertyChanging();
+			entity.TOUD_KIN = null;
 		}
 	}
 }

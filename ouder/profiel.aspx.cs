@@ -16,7 +16,7 @@ public partial class ouder_profiel : System.Web.UI.Page
     OuderDAL Ouder = new OuderDAL();
    // DAL.VindjekindjeDataContext dc = new DAL.VindjekindjeDataContext();
     //deze variabele helpt me te onthouden over welke ouder het gaat
-    int ouderId = 0;
+    
 
     protected void Page_Load(object sender, EventArgs e)
     {

@@ -6,195 +6,52 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <div id="omslag_center">
-        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-        <div class="center-bandjes" style="width:1024px; margin:auto;" >
-           <!-- <p>Informatie over het 1ste kindje:</p>-->
-            <div class="links-profiel-bandjes" style="float:left; margin-left:220px;">
-                <div id="image1">
-                </div>
-            </div>
-            <div class="rechts-profiel-bandjes" style="float:left">
 
-                <div id="myDynamicTable1" style="float:left; margin-top:25px;" >
-                </div>
-                <div class="clear">
-                </div>
-                <div id="button1" style="float:left">
-                </div>
+        <div id="content">
+            
+                <asp:Repeater ID="RepKinderen" runat="server">
 
-            </div>
+                    <ItemTemplate>
+                        <table cellspacing="0">
+                        <tr class="benaming">
+                            <td><span>Naam:</span></td>
+                            <td><%# Eval("Naam") %></td>
+                        </tr>
+                        <tr>
+                            <td><span>Voornaam:</span></td>
+                            <td><%# Eval("Voornaam") %></td>
+                        </tr>
+                        <tr class="benaming">
+                            <td><span>Geboorte datum:</span></td>
+                            <td><%# Eval("GebDate","{0:MMMM d, yyyy}")%></td>
+                        </tr>
+                        </table>
+                        <table>
+                        <tr class="detail">
+                           <td><a href="Kindprofiel.aspx/?id=<%# Eval("KindId") %>">Detail</a></td>
 
-        </div>
-         <div class="clear">
-        </div>
-        <div class="center-bandjes" style="width:1024px; margin:auto;">
+                        </tr>
+                        </table>
+                        
+                        
+                    </ItemTemplate>
 
-            <div class="links-profiel-bandjes" style="float:left; margin-left:220px;">
-                <div id="image2">
-                </div>
-            </div>
-            <div class="rechts-profiel-bandjes" style="float:left">
+                   
+                </asp:Repeater>
+            
 
-                <div id="myDynamicTable2" style="float:left; margin-top:25px;">
-                </div>
-                
-                <div class="clear">
-                </div>
-                <div id="button2" style="float:left">
-                </div>
-
-            </div>
-
-        </div>
-         <div class="clear">
-        </div>
-        <div class="center-bandjes" style="width:1024px; margin:auto;">
-
-            <div class="links-profiel-bandjes" style="float:left; margin-left:220px;">
-                <div id="image3">
-                </div>
-            </div>
-            <div class="rechts-profiel-bandjes" style="float:left">
-
-                <div id="myDynamicTable3" style="float:left; margin-top:25px;">
-                </div>
-                <div class="clear">
-                </div>
-                <div id="button3" style="float:left">
-                </div>
-
-            </div>
-
-        </div>
-         <div class="clear">
-        </div>
-        <div class="center-bandjes" style="width:1024px; margin:auto;">
-
-            <div class="links-profiel-bandjes" style="float:left; margin-left:220px;">
-                <div id="image4">
-                </div>
-            </div>
-            <div class="rechts-profiel-bandjes" style="float:left">
-
-                <div id="myDynamicTable4" style="float:left; margin-top:25px;">
-                </div>
-                <div class="clear">
-                </div>
-                <div id="button4" style="float:left">
-                </div>
-
-            </div>
-
-        </div>
-         <div class="clear">
-        </div>
-        <div class="center-bandjes" style="width:1024px; margin:auto;">
-
-            <div class="links-profiel-bandjes" style="float:left; margin-left:220px;">
-                <div id="image5">
-                </div>
-            </div>
-            <div class="rechts-profiel-bandjes" style="float:left">
-
-                <div id="myDynamicTable5" style="float:left; margin-top:25px;">
-                </div>
-                <div class="clear">
-                </div>
-                <div id="button5" style="float:left">
-                </div>
-
-            </div>
-
-        </div>
-         <div class="clear">
-        </div>
-        <!--tot 5 kinderen hebben css opmaak verder uitwerken indien nodig-->
-        <div class="center-bandjes">
-
-            <div class="links-profiel-bandjes">
-                <div id="image6">
-                </div>
-            </div>
-            <div class="rechts-profiel-bandjes">
-
-                <div id="myDynamicTable6">
-                </div>
-
-                <div id="button6">
-                </div>
-
-            </div>
-
-        </div>
-         <div class="clear">
-        </div>
-        <div class="center-bandjes">
-
-            <div class="links-profiel-bandjes">
-                <div id="image7">
-                </div>
-            </div>
-            <div class="rechts-profiel-bandjes">
-
-                <div id="myDynamicTable7">
-                </div>
-
-                <div id="button7">
-                </div>
-
-            </div>
-
-        </div>
-         <div class="clear">
-        </div>
-        <div class="center-bandjes">
-
-            <div class="links-profiel-bandjes">
-                <div id="image8">
-                </div>
-            </div>
-            <div class="rechts-profiel-bandjes">
-
-                <div id="myDynamicTable8">
-                </div>
-
-                <div id="button8">
-                </div>
-
-            </div>
-
-        </div>
-         <div class="clear">
-        </div>
-        <div class="center-bandjes">
-
-            <div class="links-profiel-bandjes">
-                <div id="image9">
-                </div>
-            </div>
-            <div class="rechts-profiel-bandjes">
-
-                <div id="myDynamicTable9">
-                </div>
-
-                <div id="button9">
-                </div>
-
-            </div>
-
-        </div>
-         <div class="clear">
         </div>
     </div>
     <script type="text/javascript">
         var id = '<%# id%>';
-        
+
+
         for (var i = 1; i <= id; i++) {
             //adddiv(i)
             addTable(i);
             addImage(i);
             //for (var j = 1; j <= 1; j++) {
-            
+
             addButton(i);
             //  }
 
