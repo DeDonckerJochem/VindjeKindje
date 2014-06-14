@@ -67,6 +67,8 @@
       <Column Name="Voornaam" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Functie" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="FkGemeenteId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ProfielFoto" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ProfielFotoId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="THUL_TARM_HUL" Member="TARM_HULs" ThisKey="HulpverlenerId" OtherKey="FkHulpVerlenerId" Type="TARM_HUL" />
       <Association Name="TGEM_THUL" Member="TGEM" ThisKey="FkGemeenteId" OtherKey="GemeenteId" Type="TGEM" IsForeignKey="true" />
     </Type>
@@ -106,8 +108,9 @@
       <Column Name="GebDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="Bloedgroep" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Adres" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="OuderImage" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ProfielFoto" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ProfielFotoId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="TOUD_TOUD_KIN" Member="TOUD_KINs" ThisKey="Ouderid" OtherKey="FkOuderId" Type="TOUD_KIN" />
     </Type>
   </Table>

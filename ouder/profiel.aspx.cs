@@ -8,6 +8,8 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Web.Security;
 using System.Data.Linq;
+using System.Configuration;
+using System.IO;
 
 
 
@@ -16,14 +18,17 @@ public partial class ouder_profiel : System.Web.UI.Page
     OuderDAL Ouder = new OuderDAL();
    // DAL.VindjekindjeDataContext dc = new DAL.VindjekindjeDataContext();
     //deze variabele helpt me te onthouden over welke ouder het gaat
-    
 
+    public int ProfielFotoId;
+    //public int HulpId;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
+
+            
             //deze variabele helpt me te onthouden over welke ouder het gaat
-            int ouderId = 0;
+          
             //Initial setup when page loads
             string naam = User.Identity.Name;
            
@@ -31,10 +36,13 @@ public partial class ouder_profiel : System.Web.UI.Page
 
             if (Ouder.GetCompleteOuder(out user, naam))
             {
-
+                OuderId.Value = Convert.ToString(user.Ouderid); 
+                ProfielFotoId = Convert.ToInt32(user.ProfielFotoId);
+                
+               bindGrid();
                 /*vullen van de velden met de gegevens voor de ingelogde gebruiker*/
                 NaamTxt.Text = user.Naam;
-                ouderId = user.Ouderid;
+              
                 VoornaamTxt.Text = user.Voornaam;
                 TelTxt.Text = user.TelefoonNr;
                 MutTxt.Text = user.MutualiteitsNr.ToString();
@@ -68,13 +76,13 @@ public partial class ouder_profiel : System.Web.UI.Page
             }
             else
             {
-                NaamTxt.Text = null;
-
+                //NaamTxt.Text = null;
+               // HulpId = Convert.ToInt32(user.Ouderid); 
             }
-
+            //HulpId = Convert.ToInt32(user.Ouderid); 
         }
+
        
-        
     }
 
 
@@ -121,9 +129,79 @@ public partial class ouder_profiel : System.Web.UI.Page
 
                 Ouder.updateOuder(user.Ouderid, usertoupdate);
 
+               // Response.AppendHeader("Refresh", "0;URL=profiel.aspx");
+            }
+            /*het onediteerbaar maken van de velden voor deze gebruiker*/
+            NaamTxt.ReadOnly = true;
+            NaamTxt.BackColor = System.Drawing.SystemColors.GrayText;
+            VoornaamTxt.ReadOnly = true;
+            VoornaamTxt.BackColor = System.Drawing.SystemColors.GrayText;
+            TelTxt.ReadOnly = true;
+            TelTxt.BackColor = System.Drawing.SystemColors.GrayText;
+            MutTxt.ReadOnly = true;
+            MutTxt.BackColor = System.Drawing.SystemColors.GrayText;
+            GebDatTxt.ReadOnly = true;
+            GebDatTxt.BackColor = System.Drawing.SystemColors.GrayText;
+            BloedgroepTxt.ReadOnly = true;
+            BloedgroepTxt.BackColor = System.Drawing.SystemColors.GrayText;
+            GebDatTxt.ReadOnly = true;
+            GebDatTxt.BackColor = System.Drawing.SystemColors.GrayText;
+            AdresTxt.ReadOnly = true;
+            AdresTxt.BackColor = System.Drawing.SystemColors.GrayText;
+
+    }
+
+
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            Byte[] bytes = null;
+            if (FileUpload1.HasFile)
+            {
+                string filename = FileUpload1.PostedFile.FileName;
+                string filePath = Path.GetFileName(filename);
+
+                Stream fs = FileUpload1.PostedFile.InputStream;
+                BinaryReader br = new BinaryReader(fs);
+                bytes = br.ReadBytes((Int32)fs.Length);
+            }
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+            {
+                string updateSql = "UPDATE TOUD " + "SET ProfielFoto = @Image " + "WHERE OuderId = @OuderId";
+                SqlCommand command = new SqlCommand(updateSql, connection);
+                command.Parameters.Add("@OuderId",
+                SqlDbType.Int).Value = OuderId.Value;
+                command.Parameters.Add("@Image",
+                SqlDbType.Binary).Value = bytes;
+                connection.Open();
+                command.ExecuteNonQuery();
+                bindGrid();
                 Response.AppendHeader("Refresh", "0;URL=profiel.aspx");
             }
-           
+        }
+        catch (Exception)
+        {     //error     
+        }
+    }
+
+    protected void bindGrid()
+    {
+        DataSet ds = new DataSet();
+        using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString))
+        {
+            connection.Open();
+
+
+            string cmdstr = "Select ProfielFotoId from TKIN WHERE ProfielFotoId =" + ProfielFotoId;
+            SqlCommand cmd = new SqlCommand(cmdstr, connection);
+
+
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            adp.Fill(ds);
+            gvDetails.DataSource = ds;
+            gvDetails.DataBind();
+        }
 
     }
 

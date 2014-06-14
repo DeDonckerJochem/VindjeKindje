@@ -24,7 +24,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
             if (id != null)
             {
                 //Response.Write("id is ");
-                Session["id"] = id;
+                Session["KindId"] = id;
 
 
                 email = Ouder.getOuderEmailAdress((id));

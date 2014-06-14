@@ -10,13 +10,14 @@
                 <Columns>
                     <asp:TemplateField HeaderText="Profiel foto">                   
                         <ItemTemplate>
-                            <asp:Image ID="ImageName" ImageUrl='<%# "Handler.ashx?ProfielFotoId="+ Eval("ProfielFotoId") %>' runat="server"
+                            <asp:Image ID="ImageName" ImageUrl='<%# "TOUDHandler.ashx?ProfielFotoId="+ Eval("ProfielFotoId") %>' runat="server"
                                 Height="200px" Width="200px" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
-
+             <asp:FileUpload ID="FileUpload1" runat="server" />
+            <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
         </div>
         <div id="rechts-profiel">
         <h1>General information:</h1>
@@ -52,7 +53,7 @@
                     <td><asp:TextBox ID="AdresTxt" runat="server"></asp:TextBox>
                     <!--<img class="editpijltje" src="../images/pencil-icon.png" alt="edit pencile" />--></td></tr>
 
-
+                    <asp:HiddenField ID="OuderId" runat="server" Value="" />
                     <tr><td>
                         <asp:Label ID="EditLbl" runat="server" Text="Edit Fields: "></asp:Label>
                         <asp:ImageButton ID="EditBtn"  runat="server" OnClick="EditBtn_Click" class="editpijltje" src="../images/pencil-icon.png" /></td>

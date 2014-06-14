@@ -1354,6 +1354,10 @@ namespace DAL
 		
 		private System.Nullable<int> _FkGemeenteId;
 		
+		private System.Data.Linq.Binary _ProfielFoto;
+		
+		private System.Nullable<int> _ProfielFotoId;
+		
 		private EntitySet<TARM_HUL> _TARM_HULs;
 		
 		private EntityRef<TGEM> _TGEM;
@@ -1372,6 +1376,10 @@ namespace DAL
     partial void OnFunctieChanged();
     partial void OnFkGemeenteIdChanging(System.Nullable<int> value);
     partial void OnFkGemeenteIdChanged();
+    partial void OnProfielFotoChanging(System.Data.Linq.Binary value);
+    partial void OnProfielFotoChanged();
+    partial void OnProfielFotoIdChanging(System.Nullable<int> value);
+    partial void OnProfielFotoIdChanged();
     #endregion
 		
 		public THUL()
@@ -1481,6 +1489,46 @@ namespace DAL
 					this._FkGemeenteId = value;
 					this.SendPropertyChanged("FkGemeenteId");
 					this.OnFkGemeenteIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProfielFoto", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary ProfielFoto
+		{
+			get
+			{
+				return this._ProfielFoto;
+			}
+			set
+			{
+				if ((this._ProfielFoto != value))
+				{
+					this.OnProfielFotoChanging(value);
+					this.SendPropertyChanging();
+					this._ProfielFoto = value;
+					this.SendPropertyChanged("ProfielFoto");
+					this.OnProfielFotoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProfielFotoId", DbType="Int")]
+		public System.Nullable<int> ProfielFotoId
+		{
+			get
+			{
+				return this._ProfielFotoId;
+			}
+			set
+			{
+				if ((this._ProfielFotoId != value))
+				{
+					this.OnProfielFotoIdChanging(value);
+					this.SendPropertyChanging();
+					this._ProfielFotoId = value;
+					this.SendPropertyChanged("ProfielFotoId");
+					this.OnProfielFotoIdChanged();
 				}
 			}
 		}
@@ -1778,7 +1826,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProfielFoto", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProfielFoto", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary ProfielFoto
 		{
 			get
@@ -2130,9 +2178,11 @@ namespace DAL
 		
 		private string _Adres;
 		
-		private System.Data.Linq.Binary _OuderImage;
+		private System.Data.Linq.Binary _ProfielFoto;
 		
 		private string _Email;
+		
+		private System.Nullable<int> _ProfielFotoId;
 		
 		private EntitySet<TOUD_KIN> _TOUD_KINs;
 		
@@ -2156,10 +2206,12 @@ namespace DAL
     partial void OnBloedgroepChanged();
     partial void OnAdresChanging(string value);
     partial void OnAdresChanged();
-    partial void OnOuderImageChanging(System.Data.Linq.Binary value);
-    partial void OnOuderImageChanged();
+    partial void OnProfielFotoChanging(System.Data.Linq.Binary value);
+    partial void OnProfielFotoChanged();
     partial void OnEmailChanging(string value);
     partial void OnEmailChanged();
+    partial void OnProfielFotoIdChanging(System.Nullable<int> value);
+    partial void OnProfielFotoIdChanged();
     #endregion
 		
 		public TOUD()
@@ -2328,22 +2380,22 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OuderImage", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary OuderImage
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProfielFoto", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary ProfielFoto
 		{
 			get
 			{
-				return this._OuderImage;
+				return this._ProfielFoto;
 			}
 			set
 			{
-				if ((this._OuderImage != value))
+				if ((this._ProfielFoto != value))
 				{
-					this.OnOuderImageChanging(value);
+					this.OnProfielFotoChanging(value);
 					this.SendPropertyChanging();
-					this._OuderImage = value;
-					this.SendPropertyChanged("OuderImage");
-					this.OnOuderImageChanged();
+					this._ProfielFoto = value;
+					this.SendPropertyChanged("ProfielFoto");
+					this.OnProfielFotoChanged();
 				}
 			}
 		}
@@ -2364,6 +2416,26 @@ namespace DAL
 					this._Email = value;
 					this.SendPropertyChanged("Email");
 					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProfielFotoId", DbType="Int")]
+		public System.Nullable<int> ProfielFotoId
+		{
+			get
+			{
+				return this._ProfielFotoId;
+			}
+			set
+			{
+				if ((this._ProfielFotoId != value))
+				{
+					this.OnProfielFotoIdChanging(value);
+					this.SendPropertyChanging();
+					this._ProfielFotoId = value;
+					this.SendPropertyChanged("ProfielFotoId");
+					this.OnProfielFotoIdChanged();
 				}
 			}
 		}

@@ -22,7 +22,11 @@ public partial class ouder_Kindprofiel : System.Web.UI.Page
 
            
             DAL.TKIN kind;
-            Guid kindid = new Guid(Request.QueryString["id"]);
+            
+                Guid kindid = new Guid(Request.QueryString["id"]);
+            
+            
+            KindIdlbl.Value = Request.QueryString["id"];
             
             if (Kind.GetCompleteKind(out kind, kindid))
             {
@@ -147,12 +151,13 @@ public partial class ouder_Kindprofiel : System.Web.UI.Page
                 string updateSql = "UPDATE TKIN " + "SET ProfielFoto = @Image " + "WHERE KindId = @KindId";
                 SqlCommand command = new SqlCommand(updateSql, connection);
                 command.Parameters.Add("@KindId",
-                SqlDbType.VarChar, 50).Value = Request.QueryString["id"];
+                SqlDbType.VarChar, 50).Value = KindIdlbl.Value;
                 command.Parameters.Add("@Image",
                 SqlDbType.Binary).Value = bytes;
                 connection.Open();
                 command.ExecuteNonQuery();
                 bindGrid();
+                Response.AppendHeader("Refresh", "0;URL=profiel.aspx/?id=" + Request.QueryString["id"]);
             }
         }
         catch (Exception)

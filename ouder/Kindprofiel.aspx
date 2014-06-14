@@ -50,7 +50,7 @@
                     <td><asp:TextBox ID="AdresTxt" runat="server"></asp:TextBox>
                     <!--<img class="editpijltje" src="../images/pencil-icon.png" alt="edit pencile" />--></td></tr>
 
-
+                    <asp:HiddenField ID="KindIdlbl" runat="server" Value="" />
                     <tr><td>
                         <asp:Label ID="EditLbl" runat="server" Text="Edit Fields: "></asp:Label>
                         <asp:ImageButton ID="EditBtn"  runat="server" OnClick="EditBtn_Click" class="editpijltje" src="../../images/pencil-icon.png" /></td>
